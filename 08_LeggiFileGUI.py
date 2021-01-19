@@ -6,11 +6,13 @@ from matplotlib.figure import Figure
 
 def folder_selector():
     global file_name
-    file_name = tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt')]).name
-    if file_name == "N":
-        file_name = ""
-    text_box.delete(0,"end")
-    text_box.insert(0, file_name)
+    try:
+        file_name = tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt')]).name
+        text_box.delete(0,"end")
+        text_box.insert(0, file_name)
+    except:
+        pass
+
 
 def create_graphic():
     ListX = []
