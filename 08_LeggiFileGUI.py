@@ -6,7 +6,7 @@ from matplotlib.figure import Figure
 
 def folder_selector():
     global file_name
-    file_name = str(tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt')])).strip("<_io.TextIOWrapper name='").strip("' mode='r' encoding='cp1252'>")
+    file_name = tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt')]).name
     if file_name == "N":
         file_name = ""
     text_box.delete(0,"end")
