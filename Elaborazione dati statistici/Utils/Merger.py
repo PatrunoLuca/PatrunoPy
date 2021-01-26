@@ -2,7 +2,7 @@ from os import remove
 from PIL import Image
 import numpy as np
 
-def Merge_Graph(file1, file2, ext):
+def Merge_Graph(file1, file2, ext, newname):
     #Creo una lista con i file
     list_im = [f'{file1}.{ext}', f'{file2}.{ext}']
     #Trasformo quei file in oggetti immagine e li immagazzino in una lista
@@ -14,7 +14,7 @@ def Merge_Graph(file1, file2, ext):
     #Trasformo l'array in un oggetto Image
     img= Image.fromarray( imgs_comb)
     #Salvo l'immagine
-    img.save("Grafici.png")
+    img.save(f"{newname}.{ext}")
     #Elimino i due file che sono stati uniti
-    remove("Utils/2018.png")
-    remove("Utils/2019.png")
+    remove(f"{file1}.{ext}")
+    remove(f"{file1}.{ext}")
