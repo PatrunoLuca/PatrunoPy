@@ -3,7 +3,7 @@
 
   
 
-Il progetto è composto da 2 file python e una cartella in cui sono salvti dei file necessari per l'esecuzione del programma.
+Il progetto è composto da 2 file python e una cartella in cui sono presenti dei file necessari per l'esecuzione del programma.
 
 Il file "Grafico Istat.py" genera due grafici grazie al modulo matplotlib, i due grafici sono dei grafici a barre multiple.
 
