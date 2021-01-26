@@ -16,9 +16,3 @@ def Extract(filename):
     #Restituisco la lista dei dati
     return dizionario
 
-#Creo 2 funzioni, ognuna passa al metodo Extract un file e poi restituisce un dizionario in output
-def Extract_2018():
-    return Extract("Utils/2018.csv")
-    
-def Extract_2019():
-    return Extract("Utils/2019.csv")

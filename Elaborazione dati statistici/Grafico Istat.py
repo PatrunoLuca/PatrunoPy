@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from Utils import Extract_2018, Extract_2019, Merge_Graph
+from Utils import Extract, Merge_Graph
 #Importo le librerie necessarie
     
 def Grafico(dizionario, anno):
@@ -37,8 +37,8 @@ def Grafico(dizionario, anno):
 
 if __name__ == "__main__":
     #Definisco i due dizionario
-    Dizionario_2018 = Extract_2018()
-    Dizionario_2019 = Extract_2019()
+    Dizionario_2018 = Extract("Utils/2018.csv")
+    Dizionario_2019 = Extract("Utils/2019.csv") 
     
     #Generò i due grafici
     Grafico(Dizionario_2018, "2018")

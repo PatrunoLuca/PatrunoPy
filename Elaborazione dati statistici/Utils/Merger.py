@@ -14,7 +14,7 @@ def Merge_Graph(file1, file2, ext):
     #Trasformo l'array in un oggetto Image
     img= Image.fromarray( imgs_comb)
     #Salvo l'immagine
-    img.save("Istat.png")
+    img.save("Grafici.png")
     #Elimino i due file che sono stati uniti
     remove("Utils/2018.png")
     remove("Utils/2019.png")
