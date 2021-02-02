@@ -1,9 +1,10 @@
+#Autore --> Luca Patruno
 import matplotlib.pyplot as plt
 from guizero import *
 
 def file_selector():
     try:
-        file_name = app.select_file(filetypes=[["File di testo", "*.txt"]])
+        file_name = app.select_file(filetypes=[["File di testo", "*.txt"], ["Valori separati da una virgola", '*.csv']])
         if file_name != "":
             text_box.value = file_name
     except:

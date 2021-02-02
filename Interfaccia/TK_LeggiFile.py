@@ -1,3 +1,4 @@
+#Autore --> Luca Patruno
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -7,7 +8,7 @@ from matplotlib.figure import Figure
 def file_selector():
     global file_name
     try:
-        file_name = tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt')]).name
+        file_name = tk.filedialog.askopenfile(mode='r', filetypes=[("File di testo", '*.txt'), ("Valori separati da una virgola", '*.csv')]).name
         text_box.delete(0,"end")
         text_box.insert(0, file_name)
     except:
