@@ -1,0 +1,4 @@
+matplotlib==3.3.4
+pandas==1.2.3
+rich==9.13.0
+pyfiglet==0.8.post1
