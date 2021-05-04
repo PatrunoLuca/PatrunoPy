@@ -6,8 +6,7 @@
 
 ## Immagini
 
-![Interfaccia](https://github.com/PatrunoLuca/PatrunoPY/
-blob/main/haiku/interfaccia.png)
+![Interfaccia](https://github.com/PatrunoLuca/PatrunoPY/blob/main/Haiku/interfaccia.png)
 
 ## Codice
 
