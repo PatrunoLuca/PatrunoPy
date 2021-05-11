@@ -3,7 +3,9 @@ from random import choice
 from tkinter import Tk, Label, Button
 from pyperclip import copy
 
+#Creo una classe app
 class App:
+    #Definisco i widget
     def __init__(self, master):
         self.master = master
         self.master.geometry("600x300")
@@ -25,7 +27,7 @@ class App:
         self.haiku2 = Label(self.master, text="")
         self.haiku2.pack()
         self.haiku2.config(font=("Times", 15), justify="center")
-        
+
         self.haiku3 = Label(self.master, text="")
         self.haiku3.pack()
         self.haiku3.config(font=("Times", 15), justify="center")
@@ -34,13 +36,15 @@ class App:
         self.copy_button.pack()
         self.copy_button.config(font=("Times", 15), justify="center", width=70)
 
-
+    #Apre il file "haiku.json", estrae un elemento casuale per ogni verso e li assegna ai 3 label
     def generate_haiku(self):
         with open("haiku.json", "r") as outfile:
             self.haiku1["text"], self.haiku2["text"], self.haiku3["text"] = [str(choice(i)) for i in load(outfile).values()]
 
+    #Copia l'haiku nella clipboard
     def copy_haiku(self):
-        copy("\n".join([ self.haiku1["text"], self.haiku2["text"], self.haiku3["text"]]))
+        copy("\n".join([self.haiku1["text"], self.haiku2["text"], self.haiku3["text"]]))
+
 
 if __name__ == "__main__":
     root = Tk()
