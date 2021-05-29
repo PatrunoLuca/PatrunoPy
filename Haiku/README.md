@@ -19,9 +19,9 @@ L'applicazione è stata sviluppata da un gruppo di studenti dell'istituto "**Gia
 
 ## **FOTO DELL'APPLICAZIONE**
 
-![alt text](https://i.imgur.com/C0pFLlm.png
+![alt text](https://i.imgur.com/YeBiaQD.jpg
  "Schermata principale")
- ![alt text](https://i.imgur.com/nzLr9Vl.png
+ ![alt text](https://i.imgur.com/ZtSLtOE.jpg
  "esempio haiku")
 ![alt text](https://i.imgur.com/Etry4XX.jpg
  "barra laterale")

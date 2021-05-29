@@ -51,7 +51,7 @@ class HaikuGenerator(MDApp):
     history_dialog = None
 
     def build(self):
-        self.title = "Bansho: Un Haiku al giorno"
+        self.title = "Basho: Un Haiku al giorno"
         with open('haiku.json', 'r', encoding="utf-8") as outfile:
             self.database = load(outfile)
         self.theme_cls.theme_style = "Light"
