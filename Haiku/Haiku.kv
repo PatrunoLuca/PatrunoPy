@@ -47,17 +47,31 @@ NavigationLayout:
             BoxLayout:
                 orientation: 'vertical'
 
+                canvas.before:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        source: 'bg.png'
+
                 MDToolbar:
-                    title: "Haiku Generator"
+                    title: "Bansho: Un Haiku al giorno"
                     specific_text_color: app.theme_cls.opposite_bg_normal
                     elevation: 0
                     left_action_items: [['menu', lambda x: nav_drawer.set_state()]]
 
                 GridLayout:
-                    rows: 3
+                    rows: 5
                     padding: "8dp"
                     spacing: "8dp"
-
+                    
+                    MDLabel:
+                        text: ""
+                        font_style: "H3"
+                    
+                    MDLabel:
+                        text: ""
+                        font_style: "H3"
+                    
                     MDLabel:
                         id: verso_1
                         text: ""
@@ -88,7 +102,7 @@ NavigationLayout:
                     spacing: "8dp"
 
                     MDFillRoundFlatButton:
-                        text: "Generate Haiku"
+                        text: "Genera Haiku"
                         theme_text_color: "Custom"
                         text_color: app.theme_cls.opposite_bg_normal
                         halign: "center"
@@ -124,7 +138,7 @@ NavigationLayout:
                     source: "icon.png"
 
             MDLabel:
-                text: "Haiku Generator"
+                text: "Bansho: Un Haiku al giorno"
                 font_style: "Button"
                 size_hint_y: None
                 height: self.texture_size[1]
@@ -151,16 +165,6 @@ NavigationLayout:
                         IconLeftWidget:
                             icon: "history"
                             on_release: app.show_history_dialog()
-
-
-	                OneLineAvatarListItem:
-                        text: "Tema"
-                        theme_text_color: "Primary"
-                        on_release: app.change_theme()
-
-                        IconLeftWidget:
-                            icon: "theme-light-dark"
-                            on_release: app.change_theme()
 
                     OneLineAvatarListItem:
                         text: "Info App"
