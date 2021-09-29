@@ -25,17 +25,17 @@ class Videogame:
     def __repr__(self):
         return "Videogame({})".format(", ".join([str(self.__dict__[i]) for i in self.__dict__]))
 
-The_Witcher = Videogame(
-    "The Witcher 3: Wild Hunt",
-    "CD Project Red",
-    18,
-    ("PS4", "XBOX ONE", "WINDOWS"),
-    datetime(2015, 5, 19),
-    ("Action RPG"),
-    "Medieval Fantasy"
-    )
-
 if __name__ == "__main__":
+    The_Witcher = Videogame(
+        "The Witcher 3: Wild Hunt",
+        "CD Project Red",
+        18,
+        ("PS4", "XBOX ONE", "WINDOWS"),
+        datetime(2015, 5, 19),
+        ("Action RPG"),
+        "Medieval Fantasy"
+        )
+    
     print(The_Witcher)
     print(repr(The_Witcher))
     print(The_Witcher.is_out())
