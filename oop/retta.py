@@ -30,8 +30,9 @@ class Retta:
     def __str__(self):
         x = f"{self.coeff_X}X" if self.coeff_X != 1.0 else "X"
         y = f"{self.coeff_Y}Y" if self.coeff_Y != 1.0 else "Y"
-        noto = f" + {self.noto}" if self.coeff_Y != 0.0 else ""
-        return f"{x} + {y}{noto} = 0"
+        segno = "+" if self.noto > 0 else "-"
+        noto = f"{segno} {self.noto}" if self.noto != 0.0 else "" 
+        return f"{y} = {x} {noto}"
 
     def __repr__(self):
         return f"Retta({self.coeff_X}X, {self.coeff_Y}Y, {self.noto})"
