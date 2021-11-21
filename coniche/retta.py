@@ -13,34 +13,50 @@ class Retta(Conica):
         
         if (self.__a, self.__b) == (0.0, 0.0):
             raise Exception(f"{self.eq_implicita()} non è una retta")
-        if b != 0:
-            self.__m = - self.__a / self.__b
+        if b == 0.0:
+            self.__asse_di_simmetria = "x"
+            self.__m = 0.0
         else:
-            self.__m = None
+            self.__asse_di_simmetria = "y"
+            self.__m = - self.__a / self.__b
+
+    def get_simmetria(self):
+        return self.__asse_di_simmetria
 
     def get_m(self):
         return self.__m
 
-    def trova_y(self, x=int):
-        y = int((self.__m * x) + self.__c)
-        self.__punti.append((x, y))
-        return y
+    def risolvi(self, noto=int):
+        soluzione = int((self.__m * noto) + self.__c)
+        if self.__asse_di_simmetria == "y":
+            self.__punti.append((noto, soluzione))
+        else:
+            self.__punti.append(( soluzione, noto))
+        return soluzione
 
     def eq_implicita(self):
-        x = f"{self.__a}X" if self.__a != 1.0 else "X"
-        y = f"{self.__b}Y" if self.__b != 1.0 else "Y"
-        segno = "+" if self.__c >= 0 else "-"
-        c = f"{segno} {abs(self.__c)}"
-        return f"{x} + {y} {c} = 0"
+        segno_x = "" if self.__a >= 0 else "- "
+        segno_y = "+" if self.__b >= 0 else "-"
+        segno_c = "+" if self.__c >= 0 else "-"
+        
+        x = f"{segno_x}{self.__a}X" if self.__a != 1.0 else f"{segno_x}X"
+        y = f"{segno_y} {abs(self.__b)}Y" if abs(self.__b) != 1.0 else f"{segno_y} Y"
+        c = f"{segno_c} {abs(self.__c)}"
+        return f"{segno_x}{x} {y} {c} = 0"
 
     def eq_esplicita(self):
-        segno = "+" if self.__c > 0 else "-"
-        q = f"{segno} {abs(self.__c)}"
-        x = f"{self.__m}X "
-        if (q, x) != ("+ 0.0","0.0X"):
-            return f"Y = {x} {q}" 
+        x_y = "Y" if self.__asse_di_simmetria == "y" else "X"
+        m = f"{self.__m}X " if self.__asse_di_simmetria == "y" else f"{self.__m}Y "
+        
+        if self.__m == 0.0:
+            segno = "" if self.__c >= 0 else "- "
+            return f"{x_y} = {segno}{self.__c}"
+        elif self.__c != 0.0:
+            segno = "+" if self.__c >= 0 else "-"
+            return f"{x_y} = {m} {segno} {abs(self.__c)}" 
         else:
-            return "Y = 0"
+            return f"{x_y} = 0"
+
     
     @classmethod
     def intersezione(cls, r1, r2):
@@ -98,6 +114,7 @@ if __name__ == "__main__":
 
     retta1 = Retta.from_coeff(m, (x, y))
     retta2 = Retta.from_points((x1, y1), (x2, y2))
+
     retta1.coppie(1, 20)
     retta2.coppie(1, 20)
     print(f"\n\nRetta 1:\n  Implicita: {retta1.eq_implicita()}\n  Esplicita: {retta1.eq_esplicita()}\n  Punti: {retta1.coppie(1,10)}")
