@@ -19,12 +19,19 @@ class Retta(Conica):
         else:
             self.__asse_di_simmetria = "y"
             self.__m = - self.__a / self.__b
+            self.__q = - self.__c / self.__a
 
-    def get_simmetria(self):
+    @property
+    def simmetria(self):
         return self.__asse_di_simmetria
 
-    def get_m(self):
+    @property
+    def m(self):
         return self.__m
+        
+    @property
+    def q(self):
+        return self.__q
 
     def risolvi(self, noto=int):
         soluzione = int((self.__m * noto) + self.__c)
@@ -49,11 +56,11 @@ class Retta(Conica):
         m = f"{self.__m}X " if self.__asse_di_simmetria == "y" else f"{self.__m}Y "
         
         if self.__m == 0.0:
-            segno = "" if self.__c >= 0 else "- "
-            return f"{x_y} = {segno}{self.__c}"
-        elif self.__c != 0.0:
-            segno = "+" if self.__c >= 0 else "-"
-            return f"{x_y} = {m} {segno} {abs(self.__c)}" 
+            segno = "" if self.__q >= 0 else "- "
+            return f"{x_y} = {segno}{self.__q}"
+        elif self.__q != 0.0:
+            segno = "+" if self.__q >= 0 else "-"
+            return f"{x_y} = {m} {segno} {abs(self.__q)}" 
         else:
             return f"{x_y} = 0"
 
@@ -62,14 +69,14 @@ class Retta(Conica):
     def intersezione(cls, r1, r2):
         if type(r1) != Retta or type(r2) != Retta:
             raise Exception
-        elif (r1.get_a(), r1.get_b(), r1.get_c()) == (r2.get_a(), r2.get_b(), r2.get_c()):
+        elif (r1.a, r1.b, r1.c) == (r2.a, r2.b, r2.c):
             return "Coincidenti"
-        elif r1.get_m() == r2.get_m():
+        elif r1.m == r2.m:
             return None
         else:
-            det = (r1.get_a() * r2.get_b()) - (r2.get_a() * r1.get_b())
-            det_x = (r1.get_c() * r2.get_b()) - (r2.get_c() * r1.get_b())
-            det_y = (r1.get_a() * r2.get_c()) - (r2.get_a() * r1.get_c())
+            det = (r1.a * r2.b) - (r2.a * r1.b)
+            det_x = (r1.c * r2.b) - (r2.c * r1.b)
+            det_y = (r1.a * r2.c) - (r2.a * r1.c)
             return (det_x / det, det_y / det)
 
     @classmethod

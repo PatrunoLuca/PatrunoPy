@@ -27,14 +27,21 @@ class Parabola(Conica):
         coeff_direttrice = - ((1 + self.__delta) / (4 * self.__a))
         self.__direttrice = Retta(coeff_direttrice, 1, 0) if self.__asse_di_simmetria == "y" else Retta(1, coeff_direttrice, 0)
 
-    def get_fuoco(self):
+    @property
+    def fuoco(self):
         return self.__fuoco
     
-    def get_vertice(self):
+    @property
+    def vertice(self):
         return self.__vertice
     
-    def get_direttrice(self):
+    @property
+    def direttrice(self):
         return self.__direttrice
+
+    @property
+    def delta(self):
+        return self.__delta
 
     def risolvi(self, noto=int):
         soluzione = (self.__a * pow(noto, 2)) + (self.__b * noto) + self.__c
@@ -53,3 +60,18 @@ class Parabola(Conica):
     @classmethod
     def intersezione(parabola, altro):
         pass
+
+if __name__ == "__main__":
+    a = float(input("Inserisci variabile a della parabola --> "))
+    b = float(input("Inserisci variabile b della parabola --> "))
+    c = float(input("Inserisci variabile c della parabola --> "))
+    while True:
+        asse = input("\nInserisci asse di simmetria? (x/y) --> ")
+        if asse.lower() in ["x", "y"]:
+            break
+        print("Scelta non valida. Le scelte valide sono: x/y")
+    Par = Parabola(2, 3, 4, "x")
+    print(f'''
+    Fuoco: {str(Par.fuoco)}
+    Vertice: {str(Par.vertice)}
+    Direttrice: {str(Par.direttrice.eq_esplicita())}''')
