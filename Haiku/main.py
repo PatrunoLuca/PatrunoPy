@@ -6,7 +6,7 @@ from kivy.core.clipboard import Clipboard
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.properties import StringProperty
-from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.card import MDCardSwipe
@@ -14,7 +14,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.snackbar import Snackbar
 
 
-class Content(BoxLayout):
+class Content(MDBoxLayout):
     def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
         self.container = self.ids.container
@@ -28,9 +28,12 @@ class Content(BoxLayout):
                     text=haiku[0],
                     secondary_text=haiku[1],
                     tertiary_text=haiku[2],
-                    number=i)
+                    number=i,
                 )
+            )
 
+        for i in self.container.children:
+            print(i)
         if len(self.container.children) in [1, 2, 3]:
             self.height = 80 * len(self.container.children)
         elif len(self.container.children) >= 4:
@@ -52,31 +55,31 @@ class HaikuGenerator(MDApp):
 
     def build(self):
         self.title = "Basho: Un Haiku al giorno"
-        with open('haiku.json', 'r', encoding="utf-8") as outfile:
+        with open("haiku.json", "r", encoding="utf-8") as outfile:
             self.database = load(outfile)
         self.theme_cls.theme_style = "Light"
         self.title_color = "000000"
         self.text_color = "181818"
         self.theme_cls.primary_palette = "Amber"
-        self.icon = 'icon.png'
+        self.icon = "icon.png"
         return Builder.load_file("Haiku.kv")
 
     def generate_haiku(self):
-        self.root.ids["verso_1"].text = choice(self.database['verso_1'])
-        self.root.ids["verso_2"].text = choice(self.database['verso_2'])
-        self.root.ids["verso_3"].text = choice(self.database['verso_3'])
+        self.root.ids["verso_1"].text = choice(self.database["verso_1"])
+        self.root.ids["verso_2"].text = choice(self.database["verso_2"])
+        self.root.ids["verso_3"].text = choice(self.database["verso_3"])
         self.add_to_history()
 
     def copy_haiku(self):
         haiku = [
             self.root.ids["verso_1"].text,
             self.root.ids["verso_2"].text,
-            self.root.ids["verso_3"].text
-            ]
+            self.root.ids["verso_3"].text,
+        ]
 
         if haiku != ["", "", ""] and "\n".join(haiku) != Clipboard.paste():
             Clipboard.copy("\n".join(haiku))
-            Snackbar(text="Elemento copiato negli appunti!").show()
+            Snackbar(text="Elemento copiato negli appunti!").open()
 
     def show_info_dialog(self):
         app_info = "L'applicazione è stata sviluppata da un gruppo di studenti dell'istituto \"Gian Battista Vico\", all'indirizzo Coding, in un progetto scolastico monitorato in compresenza dalla professoressa di Italiano Luciana Soravia e il professore di coding Diomede Mazzone."
@@ -88,10 +91,11 @@ class HaikuGenerator(MDApp):
                     MDFlatButton(
                         text="ESCI",
                         text_color=self.theme_cls.primary_color,
-                        on_release=self.close_info_dialog
-                        )],
+                        on_release=self.close_info_dialog,
+                    )
+                ],
                 auto_dismiss=True,
-                size_hint=(0.8, 1)
+                size_hint=(0.8, 1),
             )
         self.info_dialog.open()
 
@@ -105,10 +109,11 @@ class HaikuGenerator(MDApp):
                     MDFlatButton(
                         text="ESCI",
                         text_color=self.theme_cls.primary_color,
-                        on_release=self.close_contact_dialog
-                        )],
+                        on_release=self.close_contact_dialog,
+                    )
+                ],
                 auto_dismiss=True,
-                size_hint=(0.8, 1)
+                size_hint=(0.8, 1),
             )
         self.contact_dialog.open()
 
@@ -125,16 +130,18 @@ class HaikuGenerator(MDApp):
                         MDFlatButton(
                             text="ESCI",
                             text_color=self.theme_cls.primary_color,
-                            on_release=self.close_history_dialog
-                            ),
+                            on_release=self.close_history_dialog,
+                        ),
                         MDFlatButton(
                             text="CANCELLA CRONOLOGIA",
                             text_color=self.theme_cls.primary_color,
-                            on_release=self.delete_history
-                            )],
+                            on_release=self.delete_history,
+                        ),
+                    ],
                     auto_dismiss=True,
-                    size_hint=(0.8, 1)
+                    size_hint=(0.8, 1),
                 )
+                print(self.history_dialog.content_cls)
             else:
                 self.history_dialog = MDDialog(
                     type="custom",
@@ -144,12 +151,12 @@ class HaikuGenerator(MDApp):
                         MDFlatButton(
                             text="ESCI",
                             text_color=self.theme_cls.primary_color,
-                            on_release=self.close_history_dialog
-                            )
-                        ],
+                            on_release=self.close_history_dialog,
+                        )
+                    ],
                     auto_dismiss=True,
-                    size_hint=(0.8, 1)
-                    )
+                    size_hint=(0.8, 1),
+                )
         self.history_dialog.open()
 
     def close_info_dialog(self, obj):
@@ -170,11 +177,11 @@ class HaikuGenerator(MDApp):
     def add_to_history(self):
         self.database["cronologia"][
             "elem_%s" % (len(self.database["cronologia"].keys()) + 1)
-            ] = {
-                "verso_1": self.root.ids["verso_1"].text,
-                "verso_2": self.root.ids["verso_2"].text,
-                "verso_3": self.root.ids["verso_3"].text
-                }
+        ] = {
+            "verso_1": self.root.ids["verso_1"].text,
+            "verso_2": self.root.ids["verso_2"].text,
+            "verso_3": self.root.ids["verso_3"].text,
+        }
         self.dumper()
         self.history_dialog = None
         self.reload_history()
@@ -192,36 +199,30 @@ class HaikuGenerator(MDApp):
         self.close_history_dialog("")
         self.history_dialog = None
         self.reload_history()
-        Snackbar(text="La cronologia è stata eliminata!").show()
+        Snackbar(text="La cronologia è stata eliminata!").open()
 
     def copy_item(self, obj):
         haiku = [obj.text, obj.secondary_text, obj.tertiary_text]
         if haiku != ["", "", ""] and "\n".join(haiku) != Clipboard.paste():
             Clipboard.copy("\n".join(haiku))
-            Snackbar(text="Elemento copiato negli appunti!").show()
+            Snackbar(text="Elemento copiato negli appunti!").open()
 
     def delete_item(self, obj):
-        del self.database['cronologia'][obj.number]
+        del self.database["cronologia"][obj.number]
         self.dumper()
         self.history_container.container.remove_widget(obj)
-        Snackbar(text="Elemento eliminato dalla cronologia!").show()
+        Snackbar(text="Elemento eliminato dalla cronologia!").open()
         if len(self.history_container.container.children) < 4:
             self.close_history_dialog("obj")
             self.show_history_dialog()
 
     def dumper(self):
-        with open('haiku.json', 'w', encoding="utf-8") as outfile:
-            dump(
-                self.database,
-                outfile,
-                indent=4,
-                sort_keys=True,
-                ensure_ascii=False
-                )
+        with open("haiku.json", "w", encoding="utf-8") as outfile:
+            dump(self.database, outfile, indent=4, sort_keys=True, ensure_ascii=False)
 
 
-if __name__ == '__main__':
-    stdout.reconfigure(encoding='utf-8')
+if __name__ == "__main__":
+    stdout.reconfigure(encoding="utf-8")
     __version__ = "1.0"
     Window.size = (500, 500)
     Application = HaikuGenerator()

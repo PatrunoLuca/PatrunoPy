@@ -38,7 +38,7 @@
             tertiary_text: root.tertiary_text
             _no_ripple_effect: True
 
-NavigationLayout:
+MDNavigationLayout:
 
     ScreenManager:
 
@@ -53,7 +53,7 @@ NavigationLayout:
                         size: self.size
                         source: 'bg.png'
 
-                MDToolbar:
+                MDTopAppBar:
                     title: "Basho: Un Haiku al giorno"
                     specific_text_color: app.theme_cls.opposite_bg_normal
                     elevation: 0
@@ -146,7 +146,7 @@ NavigationLayout:
                         on_release: app.show_contact_dialog()
 
                         IconLeftWidget:
-                            icon: "contact-mail-outline"
+                            icon: "contacts-outline"
                             on_release: app.show_contact_dialog()
 
                     OneLineAvatarListItem:
