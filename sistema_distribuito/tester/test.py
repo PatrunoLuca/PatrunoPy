@@ -34,13 +34,14 @@ class NodeSample:
             datefmt="%d/%m/%y %H:%M:%S",
         )
 
-    def post(self, humidity: int, moisture: int, temperature: int) -> None:
+    def post(self, humidity: int, light: int, moisture: int, temperature: int) -> None:
         logging.warning(
             str(
                 rqst.post(
                     self.url,
                     json={
                         "humidity": humidity,
+                        "light": light,
                         "moisture": moisture,
                         "temperature": temperature,
                     },
@@ -54,5 +55,5 @@ if __name__ == "__main__":
     Node = NodeSample("http://localhost:3000", token="XXX")
 
     for i in range(200):
-        Node.post(randint(20, 50), randint(300, 900), randint(0, 40))
+        Node.post(randint(20, 50), randint(200, 1000), randint(300, 900), randint(0, 40))
         sleep(SLEEPTIME)

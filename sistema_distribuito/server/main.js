@@ -56,8 +56,12 @@ app.post("/", express.json(), (req, res) => {
         status_code = 401;
     }
 
-    // WIP: CHECK THE SENSOR NUMBER
-    // WIP: CHECK IF HUMIDITY, MOISTURE AND TEMPERATURE
+    // WIP: CHECK IF HUMIDITY, LIGHT, MOISTURE AND TEMPERATURE
+
+    let sensor_number = req.get("sensor_number");
+    if (typeof sensor_number === "undefined" || sensor_number === null) {
+        sensor_number = `unknown_${req.socket.remoteAddress}`;
+    }
 
     if (status_code === false) {
         // Set the path on the database to "sensor: {"date" : { "time" ; data } }"
@@ -68,6 +72,7 @@ app.post("/", express.json(), (req, res) => {
         // Extract Humidity, Moisture and Temperature from the request
         const db_data = {
             humidity: req.body.humidity,
+            light: req.body.light,
             moisture: req.body.moisture,
             temperature: req.body.temperature,
         };
@@ -94,7 +99,10 @@ app.post("/", express.json(), (req, res) => {
 });
 
 app.get("*", (req, res) => {
-    status_message(req.socket.remoteAddress, statuses[400]);
+    logger.http(statuses[400]["message"], {
+        status_code: 400,
+        ip: req.socket.remoteAddress,
+    });
     const message =
         "<h1>Error " +
         statuses[400]["status_code"] +
